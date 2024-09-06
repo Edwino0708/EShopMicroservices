@@ -1,3 +1,5 @@
+using HealthChecks.UI.Client;
+
 var builder = WebApplication.CreateBuilder(args);
 var assembly = typeof(Program).Assembly;
 
@@ -22,7 +24,8 @@ if (builder.Environment.IsDevelopment())
 
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
-builder.Services.AddHealthChecks();
+builder.Services.AddHealthChecks()
+    .AddNpgSql(builder.Configuration.GetConnectionString("Database")!);
 
 var app = builder.Build();
 
@@ -31,31 +34,9 @@ app.MapCarter();
 
 app.UseExceptionHandler(options => { });
 
-//app.UseExceptionHandler(exceptionHandlerApp =>
-//{
-//    exceptionHandlerApp.Run(async context =>
-//    {
-//        var exception = context.Features.Get<IExceptionHandlerFeature>()?.Error;
-//        if (exception == null) 
-//        {
-//            return;
-//        }
-
-//        var poblemDetails = new ProblemDetails
-//        {
-//            Title = exception.Message,
-//            Status = StatusCodes.Status500InternalServerError,
-//            Detail = exception.StackTrace
-//        };
-
-//        var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
-//        logger.LogError(exception,exception.Message);
-
-//        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-//        context.Response.ContentType = "aplication/problem+json";
-
-//        await context.Response.WriteAsJsonAsync(poblemDetails);
-//    });
-//});
+app.UseHealthChecks("/health", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions 
+{
+    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+});
 
 app.Run();

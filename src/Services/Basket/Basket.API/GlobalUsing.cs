@@ -1,0 +1,17 @@
+﻿global using Basket.API.Models;
+global using BuildingBlock.CQRS;
+global using Carter;
+global using MediatR;
+global using Mapster;
+global using FluentValidation;
+global using BuildingBlock.Behaviors;
+global using Marten;
+global using BuildingBlock.Exceptions;
+global using Basket.API.Exceptions;
+global using Basket.API.Data;
+global using Basket.API.Basket.GetBasket;
+global using Microsoft.Extensions.Caching.Distributed;
+global using System.Text.Json;
+global using BuildingBlock.Exceptions.Handler;
+global using HealthChecks.UI.Client;
+global using System.Buffers;

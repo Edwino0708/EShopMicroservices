@@ -6,11 +6,13 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>fc36fc45-4764-47b6-a6a6-dc555015e31a</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>.</DockerfileContext>
+    <DockerfileContext>..\..\..</DockerfileContext>
     <DockerComposeProjectPath>..\..\..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AspNetCore.HealthChecks.NpgSql" Version="8.0.2" />
+    <PackageReference Include="AspNetCore.HealthChecks.UI.Client" Version="8.0.1" />
     <PackageReference Include="Carter" Version="8.2.1" />
     <PackageReference Include="Mapster" Version="7.4.0" />
     <PackageReference Include="Marten" Version="7.26.3" />

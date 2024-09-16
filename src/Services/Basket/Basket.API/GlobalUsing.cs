@@ -15,3 +15,4 @@ global using System.Text.Json;
 global using BuildingBlock.Exceptions.Handler;
 global using HealthChecks.UI.Client;
 global using System.Buffers;
+global using Basket.API.Dto;

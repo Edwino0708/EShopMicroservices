@@ -49,6 +49,7 @@ builder.Services.AddMessageBroker(builder.Configuration);
 builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 builder.Services.AddHealthChecks()
+    .AddRabbitMQ(rabbitConnectionString: builder.Configuration["MessageBroker:Host"], name: "rabbitmq-health-check")
     .AddNpgSql(builder.Configuration.GetConnectionString("Database")!)
     .AddRedis(builder.Configuration.GetConnectionString("Redis")!);
 

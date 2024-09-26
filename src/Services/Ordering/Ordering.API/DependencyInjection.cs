@@ -10,7 +10,9 @@ public static class DependencyInjection
         services.AddCarter();
         services.AddExceptionHandler<CustomExceptionHandler>();
         services.AddHealthChecks()
+           .AddRabbitMQ(rabbitConnectionString: configuration["MessageBroker:Host"], name: "rabbitmq-health-check")
            .AddSqlServer(configuration.GetConnectionString("Database")!);
+
         return services;
     }
 

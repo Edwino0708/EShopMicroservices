@@ -4,13 +4,13 @@ using MassTransit;
 
 namespace Basket.API.Basket.CheckoutBasket;
 
-public record CheckoutBasketCommad(BasketCheckoutDto BasketCheckoutDto) 
+public record CheckoutBasketCommand(BasketCheckoutDto BasketCheckoutDto) 
     : ICommand<CheckoutBasketResult>;
 
 public record CheckoutBasketResult(bool IsSuccess);
 
 public class CheckoutBasketCommadValidator
-    : AbstractValidator<CheckoutBasketCommad>
+    : AbstractValidator<CheckoutBasketCommand>
 {
     public CheckoutBasketCommadValidator()
     {
@@ -21,9 +21,9 @@ public class CheckoutBasketCommadValidator
 
 public class CheckoutBasketCommandHandler
     (IBasketRepository repository, IPublishEndpoint publishEndpoint)
-    : ICommandHandler<CheckoutBasketCommad, CheckoutBasketResult>
+    : ICommandHandler<CheckoutBasketCommand, CheckoutBasketResult>
 {
-    public async Task<CheckoutBasketResult> Handle(CheckoutBasketCommad commad, CancellationToken cancellationToken)
+    public async Task<CheckoutBasketResult> Handle(CheckoutBasketCommand commad, CancellationToken cancellationToken)
     {
         var basket = await repository.GetBasket(commad.BasketCheckoutDto.UserName, cancellationToken);
         if (basket == null) 

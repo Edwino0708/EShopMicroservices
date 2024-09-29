@@ -1,6 +1,4 @@
-﻿using Ordering.Application.Dtos;
-
-namespace Ordering.Application.Extensions;
+﻿namespace Ordering.Application.Extensions;
 
 public static class OrderExtension
 {
